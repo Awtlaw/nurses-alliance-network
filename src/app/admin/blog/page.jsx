@@ -1,0 +1,266 @@
+import { useState, useEffect } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import AdminLayout from "@/components/AdminLayout";
+import useUser from "@/utils/useUser";
+import { Trash2, Edit2, Plus, X } from "lucide-react";
+
+export default function AdminBlog() {
+  const { data: user, loading } = useUser();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState(null);
+  const [form, setForm] = useState({ title: "", slug: "", excerpt: "", content: "", status: "draft" });
+  const [deleteId, setDeleteId] = useState(null);
+  const qc = useQueryClient();
+
+  useEffect(() => {
+    if (!loading && !user && typeof window !== "undefined")
+      window.location.href = "/account/signin";
+  }, [user, loading]);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-blog-list"],
+    queryFn: async () => {
+      const res = await fetch("/api/blog");
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    enabled: !!user,
+  });
+
+  const posts = data?.posts || [];
+
+  const saveMutation = useMutation({
+    mutationFn: async (payload) => {
+      const isEdit = !!editing;
+      const url = isEdit ? `/api/blog/${editing.id}` : "/api/blog";
+      const method = isEdit ? "PUT" : "POST";
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error("Save failed");
+      return res.json();
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-blog-list"] });
+      setModalOpen(false);
+      setEditing(null);
+    }
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id) => {
+      const res = await fetch(`/api/blog/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed");
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-blog-list"] });
+      setDeleteId(null);
+    }
+  });
+
+  const handleOpenAdd = () => {
+    setEditing(null);
+    setForm({ title: "", slug: "", excerpt: "", content: "", status: "draft" });
+    setModalOpen(true);
+  };
+
+  const handleOpenEdit = (post) => {
+    setEditing(post);
+    setForm({
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt || "",
+      content: post.content || "",
+      status: post.status || "draft"
+    });
+    setModalOpen(true);
+  };
+
+  const generateSlug = (title) => {
+    return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  };
+
+  const handleTitleChange = (val) => {
+    setForm({
+      ...form,
+      title: val,
+      slug: editing ? form.slug : generateSlug(val)
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    saveMutation.mutate(form);
+  };
+
+  if (loading || !user) return null;
+
+  return (
+    <AdminLayout title="Manage News & Blog Posts">
+      <div className="max-w-6xl space-y-6">
+        <div className="flex items-center justify-between">
+          <p className="text-slate-400 text-sm">{posts.length} articles total</p>
+          <button
+            onClick={handleOpenAdd}
+            className="inline-flex items-center gap-1 bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded-xl text-xs font-semibold"
+          >
+            <Plus size={14} /> Write Post
+          </button>
+        </div>
+
+        <div className="bg-[#1E293B] border border-white/5 rounded-2xl overflow-hidden">
+          {isLoading ? (
+            <div className="text-center py-12 text-slate-500">Loading...</div>
+          ) : posts.length === 0 ? (
+            <div className="text-center py-16 text-slate-500">No blog posts found.</div>
+          ) : (
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/5 bg-slate-900/30">
+                  <th className="text-left text-xs text-slate-500 font-medium px-5 py-4">Title</th>
+                  <th className="text-left text-xs text-slate-500 font-medium px-5 py-4 hidden sm:table-cell">Slug</th>
+                  <th className="text-left text-xs text-slate-500 font-medium px-5 py-4 hidden md:table-cell">Status</th>
+                  <th className="text-right text-xs text-slate-500 font-medium px-5 py-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {posts.map((post) => (
+                  <tr key={post.id} className="border-b border-white/5 last:border-0 hover:bg-white/2">
+                    <td className="px-5 py-4 text-white text-sm font-medium">{post.title}</td>
+                    <td className="px-5 py-4 text-slate-400 text-sm hidden sm:table-cell">{post.slug}</td>
+                    <td className="px-5 py-4 hidden md:table-cell">
+                      <span className="text-xs text-slate-400 bg-white/5 px-2 py-1 rounded capitalize">{post.status}</span>
+                    </td>
+                    <td className="px-5 py-4">
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => handleOpenEdit(post)}
+                          className="p-1.5 text-slate-400 hover:text-teal-400 hover:bg-teal-500/10 rounded-lg"
+                        >
+                          <Edit2 size={14} />
+                        </button>
+                        <button
+                          onClick={() => setDeleteId(post.id)}
+                          className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+
+      {modalOpen && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#1E293B] border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-6 border-b border-white/5 bg-[#1E293B]">
+              <h2 className="text-white font-bold">{editing ? "Edit Post" : "Add Post"}</h2>
+              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-white">
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Title</label>
+                <input
+                  type="text"
+                  required
+                  value={form.title}
+                  onChange={e => handleTitleChange(e.target.value)}
+                  className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:border-teal-500"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Slug</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.slug}
+                    onChange={e => setForm({ ...form, slug: e.target.value })}
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:border-teal-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Status</label>
+                  <select
+                    value={form.status}
+                    onChange={e => setForm({ ...form, status: e.target.value })}
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:border-teal-500"
+                  >
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Excerpt</label>
+                <input
+                  type="text"
+                  value={form.excerpt}
+                  onChange={e => setForm({ ...form, excerpt: e.target.value })}
+                  placeholder="Short summarizing sentence..."
+                  className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:border-teal-500"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Content (Markdown Support)</label>
+                <textarea
+                  rows="8"
+                  required
+                  value={form.content}
+                  onChange={e => setForm({ ...form, content: e.target.value })}
+                  className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:border-teal-500 resize-none font-mono"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(false)}
+                  className="flex-1 bg-white/5 hover:bg-white/10 text-slate-300 py-2.5 rounded-xl text-sm"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={saveMutation.isLoading}
+                  className="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-2.5 rounded-xl text-sm font-medium"
+                >
+                  {saveMutation.isLoading ? "Saving..." : "Save"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {deleteId && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-[#1E293B] border border-white/10 rounded-2xl p-6 max-w-sm w-full text-center">
+            <h3 className="text-white font-bold mb-2">Delete Article?</h3>
+            <p className="text-slate-400 text-sm mb-6">This cannot be undone.</p>
+            <div className="flex gap-3">
+              <button onClick={() => setDeleteId(null)} className="flex-1 bg-white/5 text-slate-300 py-2.5 rounded-xl text-sm">
+                Cancel
+              </button>
+              <button
+                onClick={() => deleteMutation.mutate(deleteId)}
+                className="flex-1 bg-red-600 hover:bg-red-500 text-white py-2.5 rounded-xl text-sm font-medium"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </AdminLayout>
+  );
+}

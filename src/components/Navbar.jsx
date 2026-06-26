@@ -39,20 +39,20 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-slate-900/95 backdrop-blur-md shadow-lg border-b border-slate-800" : "bg-transparent"}`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? "h-16" : "h-16 lg:h-20"}`}>
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
             {logoUrl ? (
               <img src={logoUrl} alt={siteTitle} className="h-8 w-auto" />
             ) : (
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center transition-all bg-[#2563EB]">
                   <HeartPulse size={16} className="text-white animate-pulse" />
                 </div>
-                <span className="text-white font-bold text-lg sm:text-xl tracking-tight">
+                <span className="font-bold text-lg sm:text-xl tracking-tight transition-colors text-[#1F2937]">
                   {siteTitle}
                 </span>
               </div>
@@ -65,10 +65,10 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-slate-300 hover:text-white text-sm font-medium transition-colors duration-200 relative group"
+                className="text-sm font-medium transition-colors duration-200 relative group text-[#1F2937] hover:text-[#2563EB]"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-400 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 bg-[#2563EB]" />
               </a>
             ))}
           </div>
@@ -77,7 +77,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="/pricing"
-              className="bg-gradient-to-r from-teal-600 to-cyan-500 hover:from-teal-500 hover:to-cyan-400 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg shadow-teal-500/25"
+              className="bg-[#10B981] hover:bg-[#0d9488] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-sm"
             >
               Join the Alliance
             </a>
@@ -86,7 +86,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-white p-2"
+            className="lg:hidden p-2 transition-colors text-[#1F2937] hover:text-[#2563EB]"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -95,21 +95,21 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="lg:hidden bg-slate-950/98 backdrop-blur-md border-t border-slate-800">
+        <div className="lg:hidden border-t border-slate-200 bg-white shadow-md transition-all">
           <div className="px-4 py-4 space-y-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block text-slate-300 hover:text-white py-2 text-base font-medium transition-colors"
+                className="block py-2 text-base font-medium transition-colors text-[#1F2937] hover:text-[#2563EB]"
               >
                 {link.label}
               </a>
             ))}
             <a
               href="/pricing"
-              className="block bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-5 py-3 rounded-full text-sm font-semibold text-center mt-4"
+              className="block bg-[#10B981] hover:bg-[#0d9488] text-white px-5 py-3 rounded-full text-sm font-semibold text-center mt-4"
             >
               Join the Alliance
             </a>

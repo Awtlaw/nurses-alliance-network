@@ -47,48 +47,48 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800">
+    <footer className="bg-[#F8FAFC] border-t border-slate-250/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-[#2563EB] rounded-lg flex items-center justify-center">
                 <HeartPulse size={16} className="text-white animate-pulse" />
               </div>
-              <span className="text-white font-bold text-xl">
+              <span className="text-[#1F2937] font-bold text-xl">
                 {siteTitle}
               </span>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-slate-600 text-sm leading-relaxed mb-6 max-w-xs">
               {tagline}
             </p>
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-slate-400 text-sm">
-                <Mail size={14} className="text-teal-400" />
-                <a href="mailto:info@nursesalliancenetwork.org" className="hover:text-white transition-colors">
+              <div className="flex items-center gap-2 text-slate-600 text-sm">
+                <Mail size={14} className="text-[#10B981]" />
+                <a href="mailto:info@nursesalliancenetwork.org" className="hover:text-[#2563EB] transition-colors">
                   info@nursesalliancenetwork.org
                 </a>
               </div>
-              <div className="flex items-center gap-2 text-slate-400 text-sm">
-                <Phone size={14} className="text-teal-400" />
+              <div className="flex items-center gap-2 text-slate-600 text-sm">
+                <Phone size={14} className="text-[#10B981]" />
                 <span>+1 (800) 555-0199</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-400 text-sm">
-                <MapPin size={14} className="text-teal-400" />
+              <div className="flex items-center gap-2 text-slate-600 text-sm">
+                <MapPin size={14} className="text-[#10B981]" />
                 <span>100 Health Sciences Plaza, Suite 400</span>
               </div>
             </div>
             
             {/* Social links */}
             <div className="flex gap-4 mt-6">
-              <a href="#" className="text-slate-500 hover:text-teal-400 transition-colors">
+              <a href="#" className="text-slate-400 hover:text-[#2563EB] transition-colors">
                 <Twitter size={18} />
               </a>
-              <a href="#" className="text-slate-500 hover:text-teal-400 transition-colors">
+              <a href="#" className="text-slate-400 hover:text-[#2563EB] transition-colors">
                 <Linkedin size={18} />
               </a>
-              <a href="#" className="text-slate-500 hover:text-teal-400 transition-colors">
+              <a href="#" className="text-slate-400 hover:text-[#2563EB] transition-colors">
                 <Instagram size={18} />
               </a>
             </div>
@@ -97,7 +97,7 @@ export default function Footer() {
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-white font-semibold text-sm mb-4">
+              <h4 className="text-[#1F2937] font-semibold text-sm mb-4">
                 {category}
               </h4>
               <ul className="space-y-3">
@@ -105,7 +105,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-slate-400 hover:text-white text-sm transition-colors"
+                      className="text-slate-600 hover:text-[#2563EB] text-sm transition-colors"
                     >
                       {link.label}
                     </a>
@@ -116,13 +116,13 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-slate-900 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-slate-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-500 text-sm">
             &copy; {new Date().getFullYear()} {siteTitle}. All rights reserved.
           </p>
           <a
             href="/admin"
-            className="text-slate-600 hover:text-slate-400 text-xs transition-colors"
+            className="text-slate-400 hover:text-[#2563EB] text-xs transition-colors"
           >
             Admin Portal
           </a>

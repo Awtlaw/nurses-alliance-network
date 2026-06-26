@@ -139,11 +139,11 @@ export default function HomePage() {
   };
 
   return (
-    <div className="bg-[#0B0F19] min-h-screen text-slate-100 font-sans">
+    <div className="bg-white min-h-screen text-[#1F2937] font-sans">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-950">
         {/* Background Slider with Fading transition */}
         <div className="absolute inset-0 z-0">
           {heroImages.map((img, idx) => (
@@ -158,9 +158,7 @@ export default function HomePage() {
               }}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0F19]/65 via-[#0B0F19]/90 to-[#0B0F19]" />
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s' }} />
+          <div className="absolute inset-0 bg-slate-950/70" />
         </div>
 
         {/* Hero Slider Dots */}
@@ -170,7 +168,7 @@ export default function HomePage() {
               key={idx}
               onClick={() => setCurrentHeroIndex(idx)}
               className={`h-2.5 rounded-full transition-all duration-500 ${
-                idx === currentHeroIndex ? "w-8 bg-teal-400" : "w-2.5 bg-white/30 hover:bg-white/50"
+                idx === currentHeroIndex ? "w-8 bg-blue-600" : "w-2.5 bg-white/30 hover:bg-white/50"
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
@@ -179,9 +177,9 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-4 py-2 mb-8">
-              <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
-              <span className="text-teal-400 text-sm font-medium">
+            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/80 rounded-full px-4 py-2 mb-8">
+              <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
+              <span className="text-blue-700 text-sm font-medium">
                 Advocating for Nursing Excellence Worldwide
               </span>
             </div>
@@ -190,7 +188,7 @@ export default function HomePage() {
               {s.hero_headline || "Empowering Nurses, Advancing Health, Building Community"}
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-400 leading-relaxed mb-10 max-w-2xl">
+            <p className="text-lg sm:text-xl text-slate-350 leading-relaxed mb-10 max-w-2xl">
               {s.hero_subheadline ||
                 "We are a dedicated professional network supporting nurses with continuing education, career resources, advocacy, and collaborative health campaigns."}
             </p>
@@ -198,7 +196,7 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-4">
               <a
                 href={s.hero_cta_url || "/pricing"}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-600 to-cyan-500 hover:from-teal-500 hover:to-cyan-400 text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
               >
                 {s.hero_cta_text || "Join the Alliance"}
                 <ArrowRight size={18} />
@@ -221,7 +219,7 @@ export default function HomePage() {
               ].map((badge) => (
                 <div
                   key={badge}
-                  className="flex items-center gap-2 text-slate-400 text-sm"
+                  className="flex items-center gap-2 text-slate-300 text-sm"
                 >
                   <CheckCircle
                     size={14}
@@ -236,15 +234,15 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="border-y border-slate-800 bg-slate-900/50 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section className="bg-[#2563EB] relative z-10 shadow-sm border-y border-[#2563EB]/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
+                <div className="text-4xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-slate-400 text-sm">{stat.label}</div>
+                <div className="text-blue-100 text-sm font-semibold uppercase tracking-wider">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -252,13 +250,13 @@ export default function HomePage() {
       </section>
 
       {/* Programs (Services) Section */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
               Member Programs & Benefits
             </h2>
-            <p className="text-slate-400">
+            <p className="text-slate-600 text-lg">
               We provide essential services, educational programs, and professional support to help nurses thrive at every stage of their careers.
             </p>
           </div>
@@ -268,15 +266,15 @@ export default function HomePage() {
               services.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/50 transition-all duration-300 group hover:-translate-y-1"
+                  className="bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:shadow-xl hover:border-[#2563EB]/40 transition-all duration-300 group hover:-translate-y-1"
                 >
-                  <div className="w-12 h-12 bg-teal-500/10 border border-teal-500/20 rounded-xl flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300">
+                  <div className="w-12 h-12 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300">
                     <HeartPulse size={24} />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     {item.short_description}
                   </p>
                 </div>
@@ -284,30 +282,30 @@ export default function HomePage() {
             ) : (
               // Fallback default static programs
               <>
-                <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/50 transition-all duration-300 group hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-teal-500/10 border border-teal-500/20 rounded-xl flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300">
+                <div className="bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 group hover:-translate-y-1">
+                  <div className="w-12 h-12 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300">
                     <BookOpen size={24} />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">Continuing Education</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">Continuing Education</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     Earn accredited CE hours through online training, virtual conferences, and medical webinars.
                   </p>
                 </div>
-                <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/50 transition-all duration-300 group hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-teal-500/10 border border-teal-500/20 rounded-xl flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300">
+                <div className="bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 group hover:-translate-y-1">
+                  <div className="w-12 h-12 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300">
                     <ShieldCheck size={24} />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">Professional Advocacy</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">Professional Advocacy</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     We voice nurse-centric legislative reform, staffing standard improvements, and workforce support policy campaigns.
                   </p>
                 </div>
-                <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/50 transition-all duration-300 group hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-teal-500/10 border border-teal-500/20 rounded-xl flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300">
+                <div className="bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 group hover:-translate-y-1">
+                  <div className="w-12 h-12 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300">
                     <Users size={24} />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">Community Mentorship</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">Community Mentorship</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     Connect with veteran nurse leaders, clinical supervisors, and nurse practitioners to guide your medical career.
                   </p>
                 </div>
@@ -318,20 +316,20 @@ export default function HomePage() {
       </section>
 
       {/* Featured Initiatives (Projects) Section */}
-      <section className="py-24 bg-slate-900/30 border-t border-slate-800/50 relative z-10">
+      <section className="py-24 bg-white border-t border-slate-200 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
             <div className="max-w-xl">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
                 Active Campaigns & Initiatives
               </h2>
-              <p className="text-slate-400">
+              <p className="text-slate-600 text-lg">
                 Explore our ongoing efforts to improve public healthcare safety standards, nurse staffing practices, and community clinics.
               </p>
             </div>
             <a
               href="/portfolio"
-              className="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 text-sm font-semibold mt-4 md:mt-0 transition-colors"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-semibold mt-4 md:mt-0 transition-colors"
             >
               View All Campaigns
               <ArrowRight size={16} />
@@ -343,9 +341,9 @@ export default function HomePage() {
               projects.map((proj) => (
                 <div
                   key={proj.id}
-                  className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden hover:border-teal-500/40 transition-all duration-300 group flex flex-col h-full"
+                  className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#2563EB]/40 transition-all duration-300 group flex flex-col h-full"
                 >
-                  <div className="relative h-48 overflow-hidden bg-slate-800">
+                  <div className="relative h-48 overflow-hidden bg-slate-100">
                     {proj.image_url ? (
                       <img
                         src={proj.image_url}
@@ -353,24 +351,24 @@ export default function HomePage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-900/30 to-slate-900">
-                        <HeartPulse size={48} className="text-teal-600/30" />
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-slate-100">
+                        <HeartPulse size={48} className="text-blue-600/20" />
                       </div>
                     )}
-                    <span className="absolute top-4 left-4 bg-teal-500/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
+                    <span className="absolute top-4 left-4 bg-blue-600/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
                       {proj.category || "Initiative"}
                     </span>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-lg font-bold text-white mb-2 line-clamp-1">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-1">
                       {proj.title}
                     </h3>
-                    <p className="text-slate-400 text-sm mb-4 line-clamp-3">
+                    <p className="text-slate-600 text-sm mb-4 line-clamp-3 leading-relaxed">
                       {proj.short_description}
                     </p>
-                    <div className="mt-auto pt-4 border-t border-slate-800 flex gap-2 flex-wrap">
+                    <div className="mt-auto pt-4 border-t border-slate-100 flex gap-2 flex-wrap">
                       {proj.tags && proj.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="text-xs text-slate-500 bg-slate-800/40 px-2.5 py-1 rounded-md">
+                        <span key={tag} className="text-[10px] uppercase font-bold text-[#2563EB] bg-[#F8FAFC] border border-slate-200 px-3 py-1 rounded-full">
                           #{tag}
                         </span>
                       ))}
@@ -381,38 +379,38 @@ export default function HomePage() {
             ) : (
               // Default Fallback
               <>
-                <div className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden hover:border-teal-500/40 transition-all duration-300 group flex flex-col h-full">
-                  <div className="relative h-48 overflow-hidden bg-gradient-to-br from-teal-950/40 to-slate-950 flex items-center justify-center">
-                    <Stethoscope size={48} className="text-teal-600/20" />
-                    <span className="absolute top-4 left-4 bg-teal-500/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full">Advocacy</span>
+                <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#2563EB]/40 transition-all duration-300 group flex flex-col h-full">
+                  <div className="relative h-48 overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
+                    <Stethoscope size={48} className="text-blue-600/20" />
+                    <span className="absolute top-4 left-4 bg-[#2563EB]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full">Advocacy</span>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-lg font-bold text-white mb-2">Safe Nurse Staffing Standards</h3>
-                    <p className="text-slate-400 text-sm mb-4">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">Safe Nurse Staffing Standards</h3>
+                    <p className="text-slate-600 text-sm mb-4 leading-relaxed">
                       Lobbying state legislators to establish legally-mandated nurse-to-patient ratios in acute clinical facilities.
                     </p>
                   </div>
                 </div>
-                <div className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden hover:border-teal-500/40 transition-all duration-300 group flex flex-col h-full">
-                  <div className="relative h-48 overflow-hidden bg-gradient-to-br from-teal-950/40 to-slate-950 flex items-center justify-center">
-                    <Award size={48} className="text-teal-600/20" />
-                    <span className="absolute top-4 left-4 bg-teal-500/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full">Education</span>
+                <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 group flex flex-col h-full">
+                  <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-50 to-slate-100 flex items-center justify-center">
+                    <Award size={48} className="text-blue-600/20" />
+                    <span className="absolute top-4 left-4 bg-blue-600/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full">Education</span>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-lg font-bold text-white mb-2">Rural Health Clinic Support</h3>
-                    <p className="text-slate-400 text-sm mb-4">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">Rural Health Clinic Support</h3>
+                    <p className="text-slate-600 text-sm mb-4 leading-relaxed">
                       Providing essential medical testing kits, remote training, and nurse resources to underfunded clinical settings.
                     </p>
                   </div>
                 </div>
-                <div className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden hover:border-teal-500/40 transition-all duration-300 group flex flex-col h-full">
-                  <div className="relative h-48 overflow-hidden bg-gradient-to-br from-teal-950/40 to-slate-950 flex items-center justify-center">
-                    <Newspaper size={48} className="text-teal-600/20" />
-                    <span className="absolute top-4 left-4 bg-teal-500/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full">Community</span>
+                <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 group flex flex-col h-full">
+                  <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-50 to-slate-100 flex items-center justify-center">
+                    <Newspaper size={48} className="text-blue-600/20" />
+                    <span className="absolute top-4 left-4 bg-blue-600/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full">Community</span>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-lg font-bold text-white mb-2">Nurse Mental Health Program</h3>
-                    <p className="text-slate-400 text-sm mb-4">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">Nurse Mental Health Program</h3>
+                    <p className="text-slate-600 text-sm mb-4 leading-relaxed">
                       Promoting mental health recovery, post-shift exhaustion counseling, and workload management toolkits.
                     </p>
                   </div>
@@ -424,13 +422,13 @@ export default function HomePage() {
       </section>
 
       {/* Member Spotlights (Testimonials) Section */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
               Member Spotlights & Stories
             </h2>
-            <p className="text-slate-400">
+            <p className="text-slate-600 text-lg">
               Hear from nurse practitioners, register nurses, and educators on how the Nurses Alliance Network shapes their clinical journeys.
             </p>
           </div>
@@ -440,23 +438,25 @@ export default function HomePage() {
               testimonials.map((t) => (
                 <div
                   key={t.id}
-                  className="bg-slate-900/40 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/20 transition-all"
+                  className="bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                 >
-                  <div className="flex text-teal-400 mb-4 gap-1">
-                    {Array.from({ length: t.rating || 5 }).map((_, i) => (
-                      <span key={i} className="text-lg">★</span>
-                    ))}
+                  <div>
+                    <div className="flex text-amber-500 mb-4 gap-0.5">
+                      {Array.from({ length: t.rating || 5 }).map((_, i) => (
+                        <span key={i} className="text-lg">★</span>
+                      ))}
+                    </div>
+                    <p className="text-slate-700 italic text-sm leading-relaxed mb-6">
+                      "{t.content}"
+                    </p>
                   </div>
-                  <p className="text-slate-300 italic text-sm leading-relaxed mb-6">
-                    "{t.content}"
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-white text-sm font-bold">
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">
                       {t.member_name[0]}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">{t.member_name}</h4>
-                      <p className="text-xs text-slate-500">
+                      <h4 className="text-sm font-bold text-slate-900">{t.member_name}</h4>
+                      <p className="text-xs text-slate-500 font-medium">
                         {t.member_title} - {t.workplace_facility}
                       </p>
                     </div>
@@ -466,48 +466,54 @@ export default function HomePage() {
             ) : (
               // Default Spotlights
               <>
-                <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/20 transition-all">
-                  <div className="flex text-teal-400 mb-4 gap-0.5">★★★★★</div>
-                  <p className="text-slate-300 italic text-sm leading-relaxed mb-6">
-                    "NAN's lobbying efforts for mandated staffing ratios have renewed our hope for clinical care. The continuing education webinars are incredibly informative and easily accessible."
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-teal-400 font-bold">
+                <div className="bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex text-amber-500 mb-4 gap-0.5">★★★★★</div>
+                    <p className="text-slate-700 italic text-sm leading-relaxed mb-6">
+                      "NAN's lobbying efforts for mandated staffing ratios have renewed our hope for clinical care. The continuing education webinars are incredibly informative and easily accessible."
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563EB] font-bold">
                       SM
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">Sarah Mitchell</h4>
-                      <p className="text-xs text-slate-500">RN, BSN - General Hospital</p>
+                      <h4 className="text-sm font-bold text-slate-900">Sarah Mitchell</h4>
+                      <p className="text-xs text-slate-500 font-medium font-sans">RN, BSN - General Hospital</p>
                     </div>
                   </div>
                 </div>
-                <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/20 transition-all">
-                  <div className="flex text-teal-400 mb-4 gap-0.5">★★★★★</div>
-                  <p className="text-slate-300 italic text-sm leading-relaxed mb-6">
-                    "The community mentorship network paired me with a fantastic Nurse Practitioner advisor. Her guidance helped me successfully transition to advanced practice and complete my credentials."
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-teal-400 font-bold">
+                <div className="bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex text-amber-500 mb-4 gap-0.5">★★★★★</div>
+                    <p className="text-slate-700 italic text-sm leading-relaxed mb-6">
+                      "The community mentorship network paired me with a fantastic Nurse Practitioner advisor. Her guidance helped me successfully transition to advanced practice and complete my credentials."
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563EB] font-bold">
                       DR
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">David Rodriguez</h4>
-                      <p className="text-xs text-slate-500">NP-C - Community Clinic</p>
+                      <h4 className="text-sm font-bold text-slate-900">David Rodriguez</h4>
+                      <p className="text-xs text-slate-500 font-medium">NP-C - Community Clinic</p>
                     </div>
                   </div>
                 </div>
-                <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-2xl hover:border-teal-500/20 transition-all">
-                  <div className="flex text-teal-400 mb-4 gap-0.5">★★★★★</div>
-                  <p className="text-slate-300 italic text-sm leading-relaxed mb-6">
-                    "As a student nurse, joining NAN was the best decision. I received a scholarship, met healthcare mentors, and gained access to a rich repository of clinical training guides."
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-teal-400 font-bold">
+                <div className="bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex text-amber-500 mb-4 gap-0.5">★★★★★</div>
+                    <p className="text-slate-700 italic text-sm leading-relaxed mb-6">
+                      "As a student nurse, joining NAN was the best decision. I received a scholarship, met healthcare mentors, and gained access to a rich repository of clinical training guides."
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563EB] font-bold">
                       EC
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">Emily Chen</h4>
-                      <p className="text-xs text-slate-500">Student Nurse - State University</p>
+                      <h4 className="text-sm font-bold text-slate-900">Emily Chen</h4>
+                      <p className="text-xs text-slate-500 font-medium">Student Nurse - State University</p>
                     </div>
                   </div>
                 </div>
@@ -518,12 +524,12 @@ export default function HomePage() {
       </section>
 
       {/* Inquiry Form Section */}
-      <section className="py-24 bg-slate-900/20 border-t border-slate-800/80 relative z-10">
+      <section className="py-24 bg-[#F8FAFC] border-t border-slate-200 relative z-10">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-slate-900/80 border border-slate-800 p-8 sm:p-12 rounded-3xl backdrop-blur-sm shadow-xl">
+          <div className="bg-white border border-slate-200 p-8 sm:p-12 rounded-3xl shadow-xl">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <h2 className="text-3xl font-bold text-white mb-3">Connect With the Alliance</h2>
-              <p className="text-slate-400 text-sm">
+              <h2 className="text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Connect With the Alliance</h2>
+              <p className="text-slate-650 text-sm leading-relaxed">
                 Have questions about our programs, legislative advocacy, or joining as a clinical institution? Send us a message and our support team will reach out.
               </p>
             </div>
@@ -531,44 +537,44 @@ export default function HomePage() {
             <form onSubmit={handleContact} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Name</label>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Name</label>
                   <input
                     type="text"
                     required
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-teal-500 transition-colors"
+                    className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3 text-[#1F2937] text-sm focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-[#2563EB]/10 outline-none transition-all"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Email</label>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email</label>
                   <input
                     type="email"
                     required
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                    className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-teal-500 transition-colors"
+                    className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3 text-[#1F2937] text-sm focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-[#2563EB]/10 outline-none transition-all"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Subject</label>
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Subject</label>
                 <input
                   type="text"
                   required
                   value={contactForm.subject}
                   onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
-                  className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-teal-500 transition-colors"
+                  className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3 text-[#1F2937] text-sm focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-[#2563EB]/10 outline-none transition-all"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Message</label>
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Message</label>
                 <textarea
                   rows="4"
                   required
                   value={contactForm.message}
                   onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                  className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-teal-500 transition-colors resize-none"
+                  className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3 text-[#1F2937] text-sm focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-[#2563EB]/10 outline-none transition-all resize-none"
                 />
               </div>
 
@@ -576,7 +582,7 @@ export default function HomePage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-600 to-cyan-500 hover:from-teal-500 hover:to-cyan-400 text-white px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg disabled:opacity-50"
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-sm disabled:opacity-50"
                 >
                   {submitting ? "Sending..." : "Submit Inquiry"}
                   <ArrowRight size={16} />
@@ -584,12 +590,12 @@ export default function HomePage() {
               </div>
 
               {contactStatus === "success" && (
-                <div className="text-center text-teal-400 text-sm mt-4">
+                <div className="text-center text-teal-600 text-sm font-bold mt-4">
                   ✓ Message sent successfully! We will get back to you shortly.
                 </div>
               )}
               {contactStatus === "error" && (
-                <div className="text-center text-rose-400 text-sm mt-4">
+                <div className="text-center text-rose-600 text-sm font-bold mt-4">
                   ✗ Failed to send message. Please try again.
                 </div>
               )}
